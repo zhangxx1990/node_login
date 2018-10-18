@@ -53,3 +53,13 @@ exports.updateTopicByID = (topicID,body,callback) =>{
         callback(null,data);
     });
 }
+
+exports.deleteTopicByID = (topicID,callback)=>{
+    const sqlstr = 'DELETE FROM `topics` WHERE `id`=?';
+    db.query(sqlstr,topicID,(err,data)=>{
+        if(err){
+            return callback(err);
+        }
+        callback(null,data);
+    })
+}

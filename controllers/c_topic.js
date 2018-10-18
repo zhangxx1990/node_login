@@ -140,3 +140,24 @@
             })
         });
     }
+
+    // 处理删除功能
+    exports.deleteTopic = (req,res)=>{
+        // 1.获取要删除的话题的id
+        const topicID = req.params.topicID;
+        // 2.让模型操作数据库话题
+        m_topic.deleteTopicByID(topicID,(err,data)=>{
+            if(err){
+                return res.send({
+                    code:500,
+                    message: err.message
+                })
+            }
+            // 3.跳转详情页
+            // res.redirect('/');
+            res.send({
+                code: 200,
+                messgae: '删除成功！'
+            });
+        });
+    }

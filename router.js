@@ -32,7 +32,9 @@
     // 监听编辑id
         .get('/topic/:topicID/edit',c_topic.showEdit)
     // 监听编辑页面
-        .post('/editTopic/:topicID', c_topic.handleEditTopic)
+        .post('/editTopic/:topicID',c_topic.handleEditTopic)
+    // 监听删除页面
+        .get('/topic/:topicID/delete',c_topic.deleteTopic)
 
 // 3.router.get()
     module.exports = router;    
