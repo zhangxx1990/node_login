@@ -3,7 +3,6 @@
 // 导入数据库配置的模块
 const db = require('../tools/db_config');
 
-
 // 1 验证邮箱
 // req.body
 const checkEmail = function(email, callback) {
@@ -13,7 +12,8 @@ const checkEmail = function(email, callback) {
             return callback(err);
         }
         callback(null, data);
-        // callback(err,data);
     });
 };
+
+
 exports.checkEmail = checkEmail;
