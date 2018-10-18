@@ -28,10 +28,25 @@ exports.addTopic = (body,callback) =>{
     });
 }
 
-// 
+// 根据id查询话题数据
 exports.findTopicByID = (topicID,callback) =>{
     const sqlstr = 'SELECT *FROM `topics`WHERE id = ?';
     db.query(sqlstr,topicID,(err,data)=>{
+        if(err){
+            return callback(err);
+        }
+        callback(null,data);
+    });
+}
+
+// updateTopicByID 修改数据
+exports.updateTopicByID = (topicID,body,callback) =>{
+    const sqlstr = 'UPDATE `topics` SET `title`=?,`content`=? WHERE `id`=?';
+    db.query(sqlstr,[
+        body.title,
+        body.content,
+        topicID
+    ],(err,data)=>{
         if(err){
             return callback(err);
         }

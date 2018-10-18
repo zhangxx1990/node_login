@@ -28,9 +28,11 @@
     // 详情页面请求
         // .get('/topic/detail',c_topic.showDetail);   
         // 动态路由 router.get('/固定标识/:参数名')
-        .get('/topic/:topicID',c_topic.showDetail);   
-        
-    
+        .get('/topic/:topicID',c_topic.showDetail)
+    // 监听编辑id
+        .get('/topic/:topicID/edit',c_topic.showEdit)
+    // 监听编辑页面
+        .post('/editTopic/:topicID', c_topic.handleEditTopic)
 
 // 3.router.get()
     module.exports = router;    

@@ -75,7 +75,68 @@
             console.log(data); 
             res.render('topic/show.html',{
                 topic:data[0],
-                userid: req.session.user
+                userid: req.session.user.id
             }); 
         });
     };
+
+    // 渲染话题编辑页
+    exports.showEdit = (req,res) =>{
+       // 1.获取topic 
+       const topicID = req.params.topicID;
+       // 拿到新的表单数据
+    //    const body = req.body;
+       // 2.让 m_topic模型 去操作数据库  返回结果
+       // 找到条件topicID查询数据  并修改
+       m_topic.findTopicByID(topicID,(err,data)=>{
+            if(err){
+                return res.send({
+                        code: 500,
+                        err: '服务器错误'
+                })
+            }
+
+        res.render('topic/edit.html',{
+            topic:data[0]
+        });
+       })
+    //    m_topic.updateTopicByID(topicID,body,(err,data)=>{
+    //        if(err){
+    //            return res.send({
+    //                 code: 500,
+    //                 err: '服务器错误'
+    //            })
+    //        }
+    //        res.send({
+    //            code: 200,
+    //            message: '编辑成功'
+    //        })
+    //    });
+    //    // 3.
+    //     res.render('topic/edit.html',{
+
+    //     });
+    
+    }
+
+    // 处理编辑页面的表单请求
+    exports.handleEditTopic = (req,res)=>{
+        // 1.获取表单数据req.body
+        const body = req.body;
+        // 2.获取表单数据
+        // req.params
+        const topicID = req.params.topicID;
+        // 3.修改数据 根据topID找到修改的数据 req.body
+        m_topic.updateTopicByID(topicID,body,(err,data)=>{
+            if(err){
+                return res.send({
+                    code: 500,
+                    err: '服务器错误'
+                });
+            }
+            res.send({
+                code: 200,
+                message: '编辑成功'
+            })
+        });
+    }

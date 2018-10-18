@@ -22,8 +22,8 @@
                 {{else}}
                 <article class="markdown-body">
                     <h1>{{topic.title}}</h1>
-                    {{if topic.userId == userid.id}}
-                    <a href="/topic/detail/edit">编辑</a>
+                    {{if topic.userId === userid}}
+                    <a href="/topic/{{topic.id}}/edit">编辑</a>
                     <a href="/topic/detail/delete" id="delete_topic">删除</a>
                     {{/if}}
                     <hr> {{topic.content}}
